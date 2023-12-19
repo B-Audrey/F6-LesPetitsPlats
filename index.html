@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="./assets/style.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+    <title>Les Petits Plats</title>
+</head>
+<body>
+<header>
+    <img src="./assets/logo.png" alt="Petit plats Logo" id="headerLogo">
+    <h1>Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses</h1>
+    <form>
+        <div>
+            <input type="text" id="search" placeholder="Recherchez une recette, un ingrédient...">
+            <button type="button"><img src="./assets/loop.png" alt="loop" id="searchLoop"></button>
+        </div>
+        <label for="search"></label>
+    </form>
+</header>
+<main>
+    <div class="formContainer">
+        <div class="formGroup">
+            <div class="formBloc">
+                <div class="formTitle">
+                    <span>Ingrédients</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="toggleable">
+                    <form>
+                        <input type="text" id="ingredients">
+                        <button type="button"><img src="./assets/loop.png" alt="loop" class="formLoop"></button>
+                        <label for="ingredients"></label>
+                    </form>
+                    <div class="searchIngredientsResults">
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="formBloc">
+                <div class="formTitle">
+                    <span>Appareils</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="toggleable">
+                    <form>
+                        <input type="text" id="devices">
+                        <button type="button"><img src="./assets/loop.png" alt="loop" class="formLoop"></button>
+                        <label for="devices"></label>
+                    </form>
+                    <div class="searchDevicesResults">
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="formBloc">
+                <div class="formTitle">
+                    <span>Ustensiles</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="toggleable">
+
+                    <form>
+                        <input type="text" id="utensils">
+                        <button type="button"><img src="./assets/loop.png" alt="loop" class="formLoop"></button>
+                        <label for="utensils"></label>
+                    </form>
+                    <div class="searchUtensilsResults">
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="numberBloc">
+            <span id="recipeNumber"></span><span>recettes</span>
+        </div>
+    </div>
+    <section>
+        <!--                    fill articles cards with Js-->
+        <div>card 1</div>
+        <div>card 2</div>
+        <div>card 3</div>
+        <div>card 4</div>
+        <div>card 5</div>
+    </section>
+</main>
+<script src="https://kit.fontawesome.com/4c168a5617.js" crossorigin="anonymous"></script>
+<script src="style-scripts/toogle.js"></script>
+</body>
+</html>

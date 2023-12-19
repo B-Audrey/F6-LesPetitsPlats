@@ -1,0 +1,193 @@
+:root {
+    --yellow: #FFD15B;
+    --black: #1b1b1b;
+    --grey: #7a7a7a;
+    --fontDarkColor: #000;
+    --backgroungColor: #ededed;
+}
+
+body {
+    font-family: "Manrope", sans-serif;
+    background-color: var(--backgroungColor);
+    margin: auto;
+}
+
+main {
+    max-width: 1440px;
+    margin: auto;
+}
+
+
+/*HEADER*/
+h1 {
+    font-family: "Anton", sans-serif;
+    font-size: 2.8em;
+    color: var(--yellow);
+    text-align: center;
+    margin: 12% 25% 0 25%;
+    text-transform: uppercase;
+}
+
+#headerLogo {
+    margin: 2em;
+    width: 207px;
+}
+
+header {
+    width: 100%;
+    max-height: 800px;
+    min-height: 600px;
+    background-image: url("./background-img.png");
+    background-position: center;
+    background-size: cover;
+    padding-bottom: 10%;
+    box-sizing: border-box;
+
+    & form {
+        width: 65%;
+        margin: auto;
+
+        & div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            width: 100%;
+            background: white;
+            border-radius: 11px;
+            margin-top: 1.5em;
+            padding: 0.5em;
+        }
+    }
+}
+
+
+
+#search {
+    width: 90%;
+    padding: 1em;
+    border: none;
+    margin: auto
+}
+
+#search + button {
+    background-color: var(--black);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 12px;
+    transition: background-color 0.3s ease;
+
+    &:hover{
+        background-color: var(--yellow);
+    }
+    &:hover #searchLoop{
+        filter: brightness(0%);
+    }
+}
+
+#searchLoop {
+    width: 27px;
+    height: 28px;
+    transition: filter 0.3s ease;
+}
+
+
+/*FILTER FORM*/
+
+
+.formContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 5%;
+    box-sizing: border-box;
+}
+
+
+.formGroup {
+    display: flex;
+    align-items: center;
+
+    & form {
+        background-color: transparent;
+        border: 1px solid var(--backgroungColor);
+        display: flex;
+        align-items: center;
+
+        & input {
+            border: none;
+            background-color: transparent;
+            padding-left: 0.5em;
+            width: 100px;
+        }
+
+        & input:focus-visible {
+            outline: none;
+        }
+
+        & button {
+            border: none;
+            background-color: transparent;
+        }
+    }
+}
+
+.formBloc {
+    background-color: white;
+    border-radius: 11px;
+    margin-right: 63px;
+    position: relative;
+    width: 179px;
+}
+
+.toggleable {
+    width: 179px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    position: absolute;
+    left: 0;
+    background-color: white;
+    border-radius: 0 0 11px 11px;
+    margin-top: -10px;
+}
+
+.toggleOpen {
+    width: 179px;
+    max-height: 200px;
+    overflow: scroll;
+    padding: 5px 16px 0 16px;
+    box-sizing: border-box;
+}
+
+.formTitle {
+    padding: 17px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+}
+
+.formLoop {
+    width: 15px;
+    height: 15px;
+    filter: brightness(70%);
+    margin: 5px;
+}
+
+.numberBloc {
+    font-family: "Anton", sans-serif;
+}
+
+/*SECTION*/
+
+section {
+    padding: 0 5%;
+    margin-top: 2em ;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 5%;
+    row-gap: 5%;
+}
