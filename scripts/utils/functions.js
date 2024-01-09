@@ -3,3 +3,6 @@ export const getData = async () => {
     return await response.json();
 };
 
+export const isLenghtThreeOrMore =(string) => {
+    return string.length >= 3;
+}

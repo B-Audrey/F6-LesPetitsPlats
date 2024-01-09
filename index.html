@@ -24,10 +24,12 @@
         </div>
         <label for="search"></label>
     </form>
+
 </header>
 <main>
     <div class="formContainer">
         <div class="formGroup">
+
             <div class="formBloc">
                 <div class="formTitle">
                     <span>Ingrédients</span>
@@ -40,23 +42,19 @@
                         <img src="./assets/loop.png" alt="loop" class="formLoop">
                         <label for="ingredients"></label>
                     </form>
-                    <div class="searchIngredientsResults">
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                    </div>
+                    <ul class="searchIngredientsResults">
+                        <!--                    fill filters with Js-->
+                        <li>test</li>
+                        <li>test</li>
+                        <li>test</li>
+                        <li>test</li>
+                        <li>test</li>
+                        <li>test</li>
+                        <li>test</li>
+                        <li>test</li>
+                        <li>test</li>
+                        <li>test</li>
+                    </ul>
 
                 </div>
             </div>
@@ -73,13 +71,9 @@
                         <img src="./assets/loop.png" alt="loop" class="formLoop">
                         <label for="devices"></label>
                     </form>
-                    <div class="searchDevicesResults">
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                    </div>
+                    <ul class="searchDevicesResults">
+                        <!--                    fill filters with Js-->
+                    </ul>
                 </div>
             </div>
 
@@ -96,13 +90,10 @@
                         <img src="./assets/loop.png" alt="loop" class="formLoop">
                         <label for="utensils"></label>
                     </form>
-                    <div class="searchUtensilsResults">
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                        <div>test</div>
-                    </div>
+                    <ul class="searchUtensilsResults">
+                        <!--                    fill filters with Js-->
+
+                    </ul>
                 </div>
             </div>
         </div>
@@ -110,6 +101,9 @@
             <span id="recipeNumber"></span><span>&nbsp;recettes</span>
         </div>
     </div>
+    <ul id="tagsBloc">
+
+    </ul>
     <section id="cardGallery">
         <!--                    fill articles cards with Js-->
     </section>
@@ -121,6 +115,7 @@
 <script src="scripts/style/toogle.js" type="module"></script>
 <!--TEMPLATES-->
 <script src="scripts/templates/card.js" type="module"></script>
-<script src="scripts/templates/card.js" type="module"></script>
+<script src="scripts/templates/recipes.js" type="module"></script>
+<script src="scripts/templates/filterTag.js" type="module"></script>
 </body>
 </html>
