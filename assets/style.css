@@ -68,12 +68,13 @@ header {
     padding: 1em;
     border: none;
     margin: auto;
+
     & + button {
-    border: none;
+        border: none;
         background-color: transparent;
         color: var(--grey);
         font-size: 1.5em;
-}
+    }
 }
 
 .main-search {
@@ -99,7 +100,6 @@ header {
     height: 28px;
     transition: filter 0.3s ease;
 }
-
 
 /*FILTER FORM*/
 
@@ -197,6 +197,7 @@ header {
     padding: 0.5em 0;
     overflow: scroll;
     max-height: 150px;
+
     & div {
         margin: 0.2em 0;
         font-weight: 200;
@@ -205,6 +206,33 @@ header {
 
 .numberBloc {
     font-family: "Anton", sans-serif;
+}
+
+
+#tagsBloc {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    padding: 1em 5%;
+
+    & div {
+        display: flex;
+        padding: 17px 18px;
+        align-items: center;
+        background-color: var(--yellow);
+        border-radius: 10px;
+        font-size: 12px;
+        text-align: center;
+        &:not(:first-child) {
+            margin-left: 1em;
+        }
+    }
+
+    & button {
+    background-color: transparent;
+        border: none;
+        margin-left: 1em;
+    }
 }
 
 /*SECTION*/
@@ -245,10 +273,12 @@ h3 {
     border-radius: 21px;
     box-shadow: 0 4px 34px 30px rgba(0, 0, 0, 0.04);
     overflow: auto;
-& .card-header{
-    display: flex;
-    justify-content: space-between;
-}
+
+    & .card-header {
+        display: flex;
+        justify-content: space-between;
+    }
+
     & img {
         object-fit: cover;
         height: 253px;
@@ -294,6 +324,7 @@ h3 {
         }
     }
 }
+
 .timer {
     background-color: var(--yellow);
     border-radius: 14px;
