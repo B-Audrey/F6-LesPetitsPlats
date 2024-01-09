@@ -19,7 +19,8 @@
     <form>
         <div>
             <input type="text" id="search" placeholder="Recherchez une recette, un ingrédient...">
-            <button type="button"><img src="./assets/loop.png" alt="loop" id="searchLoop"></button>
+            <button type="button" style="opacity:0"><i class="fa-solid fa-xmark"></i></button>
+            <button type="button" class="main-search"><img src="./assets/loop.png" alt="loop" id="searchLoop"></button>
         </div>
         <label for="search"></label>
     </form>
@@ -35,10 +36,21 @@
                 <div class="toggleable">
                     <form>
                         <input type="text" id="ingredients">
-                        <button type="button"><img src="./assets/loop.png" alt="loop" class="formLoop"></button>
+                        <button type="button" style="opacity:0"><i class="fa-solid fa-xmark"></i></button>
+                        <img src="./assets/loop.png" alt="loop" class="formLoop">
                         <label for="ingredients"></label>
                     </form>
                     <div class="searchIngredientsResults">
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
+                        <div>test</div>
                         <div>test</div>
                         <div>test</div>
                         <div>test</div>
@@ -57,7 +69,8 @@
                 <div class="toggleable">
                     <form>
                         <input type="text" id="devices">
-                        <button type="button"><img src="./assets/loop.png" alt="loop" class="formLoop"></button>
+                        <button type="button" style="opacity:0"><i class="fa-solid fa-xmark"></i></button>
+                        <img src="./assets/loop.png" alt="loop" class="formLoop">
                         <label for="devices"></label>
                     </form>
                     <div class="searchDevicesResults">
@@ -79,7 +92,8 @@
 
                     <form>
                         <input type="text" id="utensils">
-                        <button type="button"><img src="./assets/loop.png" alt="loop" class="formLoop"></button>
+                        <button type="button" style="opacity:0"><i class="fa-solid fa-xmark"></i></button>
+                        <img src="./assets/loop.png" alt="loop" class="formLoop">
                         <label for="utensils"></label>
                     </form>
                     <div class="searchUtensilsResults">
@@ -93,7 +107,7 @@
             </div>
         </div>
         <div class="numberBloc">
-            <span id="recipeNumber"></span><span>recettes</span>
+            <span id="recipeNumber"></span><span>&nbsp;recettes</span>
         </div>
     </div>
     <section id="cardGallery">
@@ -106,6 +120,7 @@
 <!--STYLE-->
 <script src="scripts/style/toogle.js" type="module"></script>
 <!--TEMPLATES-->
+<script src="scripts/templates/card.js" type="module"></script>
 <script src="scripts/templates/card.js" type="module"></script>
 </body>
 </html>

@@ -16,18 +16,21 @@ export const cardTemplate = (card) => {
         } )
         const html = `
                             <article class="card">
-                            <img src="${cardToDisplay.image}" alt="image de ${cardToDisplay.name}">
-                            <div class="card-content">
-                            <h2>${cardToDisplay.name}</h2>
-                            <div>
-                            <h3>recette</h3>
-                            <p>${cardToDisplay.description}</p>
-                            </div>
-                            <h3>ingrédients</h3>
-                            <ul>     
-                            ${liTagContent}                    
-                            </ul>
-                            </div>
+                                <img src="${cardToDisplay.image}" alt="image de ${cardToDisplay.name}">
+                                <div class="timer">${cardToDisplay.time}min</div>
+                                <div class="card-content">
+                                    <div class="card-header">
+                                        <h2>${cardToDisplay.name}</h2>
+                                    </div>                      
+                                    <div>
+                                        <h3>recette</h3>
+                                        <p>${cardToDisplay.description}</p>
+                                    </div>
+                                    <h3>ingrédients</h3>
+                                    <ul>     
+                                        ${liTagContent}                    
+                                    </ul>
+                                </div>
                             </article>
                             `
         //add the HTML content to DOM

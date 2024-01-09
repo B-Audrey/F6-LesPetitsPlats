@@ -67,16 +67,23 @@ header {
     width: 90%;
     padding: 1em;
     border: none;
-    margin: auto
+    margin: auto;
+    & + button {
+    border: none;
+        background-color: transparent;
+        color: var(--grey);
+        font-size: 1.5em;
+}
 }
 
-#search + button {
+.main-search {
     background-color: var(--black);
     border: none;
     border-radius: 10px;
     color: white;
     padding: 12px;
     transition: background-color 0.3s ease;
+    margin-left: 1em;
 
     &:hover {
         background-color: var(--yellow);
@@ -119,7 +126,7 @@ header {
             border: none;
             background-color: transparent;
             padding-left: 0.5em;
-            width: 100px;
+            width: 85px;
         }
 
         & input:focus-visible {
@@ -129,6 +136,7 @@ header {
         & button {
             border: none;
             background-color: transparent;
+            color: var(--grey);
         }
     }
 }
@@ -156,9 +164,18 @@ header {
 .toggleOpen {
     width: 179px;
     max-height: 200px;
-    overflow: scroll;
+
     padding: 5px 16px 0 16px;
     box-sizing: border-box;
+}
+
+.fa-chevron-down.rotate {
+    transform: rotate(-180deg);
+    transition: transform 0s ease;
+}
+
+.formTitle i.fa-chevron-down {
+    transition: transform 0s ease;
 }
 
 .formTitle {
@@ -167,7 +184,6 @@ header {
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-
 }
 
 .formLoop {
@@ -175,6 +191,16 @@ header {
     height: 15px;
     filter: brightness(70%);
     margin: 5px;
+}
+
+.searchDevicesResults, .searchIngredientsResults, .searchUtensilsResults {
+    padding: 0.5em 0;
+    overflow: scroll;
+    max-height: 150px;
+    & div {
+        margin: 0.2em 0;
+        font-weight: 200;
+    }
 }
 
 .numberBloc {
@@ -200,14 +226,16 @@ h2 {
     font-family: "Anton", sans-serif;
     font-weight: 400;
     font-size: 18px;
+    margin: 0;
 }
 
 h3 {
     color: var(--grey);
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: 1.08px;
+    letter-spacing: 1px;
     text-transform: uppercase;
+    margin: 3em 0 1em 0;
 }
 
 .card {
@@ -217,7 +245,10 @@ h3 {
     border-radius: 21px;
     box-shadow: 0 4px 34px 30px rgba(0, 0, 0, 0.04);
     overflow: auto;
-
+& .card-header{
+    display: flex;
+    justify-content: space-between;
+}
     & img {
         object-fit: cover;
         height: 253px;
@@ -226,12 +257,16 @@ h3 {
     }
 
     & .card-content {
-        padding: 25px;
+        padding: 0 25px 25px 25px;
     }
 
     & p {
         font-family: "Manrope", sans-serif;
         font-size: 14px;
+        font-weight: 400;
+        display: block;
+        height: 76px;
+        overflow: scroll;
     }
 
     & ul {
@@ -258,4 +293,16 @@ h3 {
             }
         }
     }
+}
+.timer {
+    background-color: var(--yellow);
+    border-radius: 14px;
+    padding: 5px 15px;
+    font-size: 12px;
+    width: 65px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: 20px;
+    position: relative;
+    top: -240px;
 }
