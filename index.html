@@ -19,7 +19,7 @@
     <form>
         <div>
             <input type="text" id="search" placeholder="Recherchez une recette, un ingrédient...">
-            <button type="button" style="opacity:0"><i class="fa-solid fa-xmark"></i></button>
+            <button id="searchXmark" type="button" style="opacity:0"><i class="fa-solid fa-xmark"></i></button>
             <button type="button" class="main-search"><img src="./assets/loop.png" alt="loop" id="searchLoop"></button>
         </div>
         <label for="search"></label>
@@ -42,18 +42,8 @@
                         <img src="./assets/loop.png" alt="loop" class="formLoop">
                         <label for="ingredients"></label>
                     </form>
-                    <ul class="searchIngredientsResults">
+                    <ul id="searchIngredientsResults">
                         <!--                    fill filters with Js-->
-                        <li>test</li>
-                        <li>test</li>
-                        <li>test</li>
-                        <li>test</li>
-                        <li>test</li>
-                        <li>test</li>
-                        <li>test</li>
-                        <li>test</li>
-                        <li>test</li>
-                        <li>test</li>
                     </ul>
 
                 </div>
@@ -71,7 +61,7 @@
                         <img src="./assets/loop.png" alt="loop" class="formLoop">
                         <label for="devices"></label>
                     </form>
-                    <ul class="searchDevicesResults">
+                    <ul id="searchDevicesResults">
                         <!--                    fill filters with Js-->
                     </ul>
                 </div>
@@ -90,7 +80,7 @@
                         <img src="./assets/loop.png" alt="loop" class="formLoop">
                         <label for="utensils"></label>
                     </form>
-                    <ul class="searchUtensilsResults">
+                    <ul id="searchUtensilsResults">
                         <!--                    fill filters with Js-->
 
                     </ul>
@@ -104,6 +94,7 @@
     <ul id="tagsBloc">
 
     </ul>
+    <p id="errorMessage"></p>
     <section id="cardGallery">
         <!--                    fill articles cards with Js-->
     </section>
@@ -117,5 +108,6 @@
 <script src="scripts/templates/card.js" type="module"></script>
 <script src="scripts/templates/recipes.js" type="module"></script>
 <script src="scripts/templates/filterTag.js" type="module"></script>
+<script src="scripts/templates/filterList.js" type="module"></script>
 </body>
 </html>
