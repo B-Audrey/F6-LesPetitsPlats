@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleIcons.forEach((toggleIcon) => {
         toggleIcon.addEventListener('click', function() {
            const toggleable = this.closest('.formBloc').querySelector('.toggleable');
-            console.log(toggleable)
             toggleable.classList.toggle('toggleOpen');
         });
     });

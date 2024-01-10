@@ -26,6 +26,11 @@ totalData.forEach( (currentCard) => {
 })
 displayCountRecipes(totalData)
 
+addTag('toto')
+addTag('toto')
+addTag('toto')
+addTag('toto')
+
 
 // LISTENERS
 search.addEventListener('input', (event ) => {
