@@ -1,5 +1,7 @@
 export const cardTemplate = (card) => {
-
+    if(!card){
+        return console.log('pas de contenu')
+    }
     const generateMediaPath = (mediaPath) => {
         return mediaPath.startsWith('./assets/card-img/') ? mediaPath : `./assets/card-img/${mediaPath}`;
     };
@@ -13,7 +15,7 @@ export const cardTemplate = (card) => {
         cardToDisplay.ingredients.forEach((ingredient) => {
             liTagContent += `<li>
                             <span class="ingredient">${ingredient.ingredient}</span>
-                            <span class="ingredient-quantity">${ingredient.quantity} ${ingredient.unit ? ingredient.unit : ''}</span>
+                            <span class="ingredient-quantity">${ingredient.quantity ? ingredient.quantity : ''} ${ingredient.unit ? ingredient.unit : ''}</span>
                            </li>`
         })
         const html = `

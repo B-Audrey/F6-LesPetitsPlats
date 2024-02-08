@@ -41,7 +41,7 @@ header {
     background-image: url("./background-img.png");
     background-position: center;
     background-size: cover;
-    padding-bottom: 10%;
+    padding-bottom: 5%;
     box-sizing: border-box;
 
     & form {
@@ -99,6 +99,12 @@ header {
     width: 27px;
     height: 28px;
     transition: filter 0.3s ease;
+}
+
+#searchTagsBloc {
+    width: 65%;
+    margin: auto;
+    padding: 0;
 }
 
 /*FILTER FORM*/
@@ -216,11 +222,12 @@ header {
 }
 
 
-#tagsBloc {
+#tagsBloc, #searchTagsBloc {
     display: flex;
     flex-wrap: wrap;
     margin: auto;
     padding: 1em 5%;
+    height: calc(85px - 2em);
 
     & li {
         display: flex;

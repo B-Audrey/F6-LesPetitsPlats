@@ -1,3 +1,3 @@
-export const displayCountRecipes = (data) => {
-    document.getElementById('recipeNumber').innerText = data.length;
+export const displayCountRecipes = (length) => {
+    document.getElementById('recipeNumber').innerText = length;
 }

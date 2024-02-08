@@ -1,5 +1,5 @@
 
-const handleFormTitleClick = (formTitle) => {
+export const handleFormTitleClick = (formTitle) => {
     const toggleable = formTitle.closest('.formBloc').querySelector('.toggleable');
     const chevronIcon = formTitle.querySelector('i.fa-chevron-down');
 
