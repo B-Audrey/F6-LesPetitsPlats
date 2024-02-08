@@ -1,10 +1,11 @@
-export const displayFilterList = (listToDisplay, DOMElementId, cssClass) => {
+
+export const displayFilterList = (listToDisplay, DOMElementId, filterType) => {
     const htmlUlElement = document.getElementById(DOMElementId);
     htmlUlElement.innerHTML = '';
 
     listToDisplay
         .sort()
-        .forEach((item) => htmlUlElement.innerHTML += `<li class="${cssClass}">${item}</li>`
+        .forEach((item) => htmlUlElement.innerHTML += `<li filtertype="${filterType}">${item}</li>`
     );
 
 }

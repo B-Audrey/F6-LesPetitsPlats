@@ -1,4 +1,3 @@
-import {removeSearchFilter} from '../main.js';
 
 //utilisation des "create element" pour ne pas regénérer tout le HTML et perdre les listeners précédemment placés
 export const addTag = (tagStringContent, className, parentElementId) => {
@@ -19,11 +18,6 @@ export const addTag = (tagStringContent, className, parentElementId) => {
     liElement.appendChild(removeButton);
 
     document.getElementById(`${parentElementId}`).appendChild(liElement);
-
-    removeButton.addEventListener('click', () => {
-        console.log('je clique')
-        removeSearchFilter(tagId);
-    });
 }
 
 

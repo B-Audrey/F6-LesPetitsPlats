@@ -1,4 +1,4 @@
-export const cardTemplate = (card) => {
+export const generateCardTemplate = (card) => {
     if(!card){
         return console.log('pas de contenu')
     }
@@ -10,7 +10,7 @@ export const cardTemplate = (card) => {
 
     // call function to generate correct mediaPath only at the 1st time, for next calls, path won't be changed again
 
-    function displayCardInDOM(cardToDisplay) {
+    function displayCardInDom(cardToDisplay) {
         let liTagContent = ''
         cardToDisplay.ingredients.forEach((ingredient) => {
             liTagContent += `<li>
@@ -41,5 +41,5 @@ export const cardTemplate = (card) => {
         return document.getElementById('cardGallery').innerHTML += html;
     }
 
-    return {card, displayCardInDOM}
+    return {card, displayCardInDom}
 }
