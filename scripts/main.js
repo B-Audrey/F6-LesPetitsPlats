@@ -2,6 +2,7 @@ import {State} from './state.js';
 import {generateCardTemplate} from './templates/card.js';
 import {displayFilterList} from './templates/filterList.js';
 import {addTag} from './templates/filterTag.js';
+import {displayCountRecipes} from './templates/recipes.js';
 
 //FN
 const resetCardGallery = () => {
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         liTags.forEach(li => li.addEventListener('click', async () => {
             addTag(li.textContent, li.getAttribute('filtertype'), 'tagsBloc')
             await state.setFilter('add',li.textContent.toLowerCase(), li.getAttribute('filtertype'))
+            displayCountRecipes(state.recipes.length)
         }))
     })
 
@@ -35,6 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         liTags.forEach(li => li.addEventListener('click', async () => {
             addTag(li.textContent, li.getAttribute('filtertype'), 'tagsBloc')
             await state.setFilter('add', li.textContent.toLowerCase(), li.getAttribute('filtertype'))
+            displayCountRecipes(state.recipes.length)
         }))
     })
 
@@ -44,24 +47,25 @@ document.addEventListener('DOMContentLoaded', async () => {
         liTags.forEach(li => li.addEventListener('click', async () => {
             addTag(li.textContent, li.getAttribute('filtertype'), 'tagsBloc')
             await state.setFilter('add',li.textContent.toLowerCase(), li.getAttribute('filtertype'))
+            displayCountRecipes(state.recipes.length)
         }))
     })
 
     state.listen('remove', () => {
-        console.log('je rentre ici')
         let removeTags = document.querySelectorAll('.removeTag')
-        console.log(removeTags)
         if (!removeTags.length) return
         removeTags.forEach( tag => {
             tag.addEventListener('click', () => {
-                console.log('je clique')
-                state.setFilter('remove', tag.textContent, tag.className)
-                tag.remove()
+                const liParent = tag.parentNode
+                state.setFilter('remove', liParent.textContent, liParent.className)
+                liParent.remove()
             })
         })
     })
 
     await state.setFilter(null ,null, '');
+    displayCountRecipes(state.recipes.length)
+
 
     const searchInput = document.getElementById('search');
     searchInput.addEventListener('input', async () => {
@@ -79,7 +83,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         addTag(searchInput.value, 'text', 'searchTagsBloc')
         searchInput.value = ''
         document.getElementById('searchXmark').style.opacity = '0';
-
     })
 
 });
