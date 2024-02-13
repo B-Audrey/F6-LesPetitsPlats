@@ -8,14 +8,26 @@ import {displayCountRecipes} from './templates/recipes.js';
 const resetCardGallery = () => {
     document.getElementById('cardGallery').innerHTML = ''
 }
+//INIT STATE
 const state = new State();
 
+//Wait for DOM to be full
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('DOM fully loaded');
 
+    //start with gallery empty
     resetCardGallery();
 
-    state.listen('recipes', (recipes) => {
+    // DEFINES FN TO BE CALLED LATER
+
+    /**
+     * to display recipes :
+     * start with empty DOM
+     * if 0 recipe, display message
+     * generate html template
+     * display html
+     * actualize recipes total
+     */
+    state.setListenFunctions('recipes', (recipes) => {
         resetCardGallery();
         document.getElementById('errorMessage').innerHTML = ''
         if (!state.recipes.length) {
@@ -33,7 +45,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     });
 
-    state.listen('ingredients', (ingredients) => {
+    /**
+     * to display different filters lists (for ingredients, devices and utensils)
+     * re init all display list from zero with html template
+     * add listener on every new generated Tag
+     * defines the click fn that will be called when click
+     * a tag will be added, filters will be set in state, input is empty, cross is hidden
+     */
+
+    state.setListenFunctions('ingredients', (ingredients) => {
         displayFilterList(ingredients, 'searchIngredientsResults', 'ingredients')
         const liTags = document.querySelectorAll('li[filterType=ingredients]')
         liTags.forEach(li => li.addEventListener('click', async () => {
@@ -44,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }))
     })
 
-    state.listen('devices', (devices) => {
+    state.setListenFunctions('devices', (devices) => {
         displayFilterList(devices, 'searchDevicesResults', 'devices')
         const liTags = document.querySelectorAll('li[filterType=devices]')
         liTags.forEach(li => li.addEventListener('click', async () => {
@@ -55,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }))
     })
 
-    state.listen('utensils', (utensils) => {
+    state.setListenFunctions('utensils', (utensils) => {
         displayFilterList(utensils, 'searchUtensilsResults', 'utensils')
         const liTags = document.querySelectorAll('li[filterType=utensils]')
         liTags.forEach(li => li.addEventListener('click', async () => {
@@ -66,10 +86,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         }))
     })
 
-
+    /**
+     * init with empty filters
+     */
     await state.setFilter(null, null, '');
 
+    // LISTENERS
 
+    /**
+     * listen on search input, when there is a value, set filters
+     */
     const searchInput = document.getElementById('search');
     searchInput.addEventListener('input', async () => {
         document.getElementById('searchCross').style.opacity = '0';
@@ -80,6 +106,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         await state.setFilter('add', searchInput.value, 'query');
     });
 
+    /**
+     * listen on loop, when click
+     * set filters, add tag and init value
+     */
     const searchLoop = document.getElementById('searchLoop')
     searchLoop.addEventListener('click', async () => {
         await state.setFilter('add', searchInput.value, 'text')
@@ -88,6 +118,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('searchXmark').style.opacity = '0';
     })
 
+    /**
+     * listen on filter blocs when written
+     * if input is written, display X cross
+     * simule an auto-complete
+     * generate new HTML content filtered with input value content
+     */
     const ingredientInput = document.getElementById('ingredients')
     ingredientInput.addEventListener('input', () => {
         const cross = document.querySelector('#ingredients + button')
@@ -115,6 +151,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         state.listenersFn.utensils.forEach(fn => fn(result))
     })
 
+    /**
+     * listeners on every X cross to empty input values
+     */
     const ingredientCross = document.getElementById('ingredientsCross')
     ingredientCross.addEventListener('click', () => {
         ingredientInput.value = ''
@@ -140,6 +179,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     })
 });
 
+
+//make this fn available to be used in other file and separate remover event listeners
 export const listenTag = (liParent) => {
     state.setFilter('remove', liParent.textContent, liParent.className)
     liParent.remove()
