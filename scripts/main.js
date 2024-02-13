@@ -80,10 +80,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const searchInput = document.getElementById('search');
     searchInput.addEventListener('input', async () => {
-        document.getElementById('searchXmark').style.opacity = '0';
+        document.getElementById('searchCross').style.opacity = '0';
 
         if (searchInput.value.length > 0) {
-            document.getElementById('searchXmark').style.opacity = '1';
+            document.getElementById('searchCross').style.opacity = '1';
         }
         await state.setFilter('add', searchInput.value, 'query');
     });
@@ -152,6 +152,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         utensilCross.style.opacity = '0'
 
+    })
+
+    const searchCross = document.getElementById('searchCross')
+    searchCross.addEventListener('click', () => {
+        searchInput.value = ''
+        searchCross.style.opacity = '0'
     })
 });
 
