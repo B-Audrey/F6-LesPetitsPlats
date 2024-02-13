@@ -356,3 +356,7 @@ h3 {
 #errorMessage {
     text-align: center;
 }
+
+#searchCross, #ingredientsCross, #devicesCross, #utensilsCross {
+    cursor: pointer;
+}
