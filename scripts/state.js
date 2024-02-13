@@ -70,7 +70,6 @@ export class State {
 
     /**
      * Set recipes and notify listeners
-     * @param recipes
      */
     setRecipes = (recipes) => {
         this.recipes = recipes;
@@ -78,30 +77,17 @@ export class State {
     };
 
     setIngredients = (ingredients) => {
-        this.filter.ingredients.forEach(i => {
-            const index = ingredients.indexOf(i);
-            if (index !== -1) ingredients.splice(index, 1);
-
-        })
-        this.ingredients = ingredients
+        this.ingredients = ingredients._filter( i => !this.filter.ingredients._includesOnArray(i) )
         this.listenersFn.ingredients.forEach(fn => fn(this.ingredients))
     }
 
     setDevices = (devices) => {
-        this.filter.devices.forEach(d => {
-            const index = devices.indexOf(d)
-            if (index !== -1) devices.splice(index, 1)
-        })
-        this.devices = devices
+        this.devices = devices._filter( d => !this.filter.devices._includesOnArray(d))
         this.listenersFn.devices.forEach(fn => fn(this.devices))
     }
 
     setUtensils = (utensils) => {
-        this.filter.utensils.forEach(u => {
-            const index = utensils.indexOf(u)
-            if (index !== -1) utensils.splice(index, 1)
-        })
-        this.utensils = utensils
+        this.utensils = utensils._filter( u => !this.filter.utensils._includesOnArray(u) )
         this.listenersFn.utensils.forEach(fn => fn(this.utensils))
     }
 

@@ -21,14 +21,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!state.recipes.length) {
             let errorMessage;
             !searchInput.value.length > 0
-                ? errorMessage = `Aucune recette ne contient ${searchInput.value} vous pouvez chercher «
+                ? errorMessage = `Aucune recette ne contient ${searchInput.value}, vous pouvez chercher «
             tarte aux pommes », « poisson », etc`
-                : errorMessage = 'vos filtres';
+                : errorMessage = `Aucune recette ne contient vos filtres, vous pouvez chercher «
+            tarte aux pommes », « poisson », etc`;
             document.getElementById('errorMessage').innerHTML = errorMessage;
         }
-        recipes
-            .map(r => generateCardTemplate(r))
-            .forEach(r => r.displayCardInDom(r.card));
+        const recipesForHtml = recipes._map(r => generateCardTemplate(r));
+        for (let recipeForHtml of recipesForHtml) {
+            recipeForHtml.displayCardInDom(recipeForHtml.card)
+        }
         displayCountRecipes(state.recipes.length)
 
     });
@@ -36,34 +38,40 @@ document.addEventListener('DOMContentLoaded', async () => {
     state.listen('ingredients', (ingredients) => {
         displayFilterList(ingredients, 'searchIngredientsResults', 'ingredients')
         const liTags = document.querySelectorAll('li[filterType=ingredients]')
-        liTags.forEach(li => li.addEventListener('click', async () => {
-            addTag(li.textContent, li.getAttribute('filtertype'), 'tagsBloc')
-            await state.setFilter('add', li.textContent.toLowerCase(), li.getAttribute('filtertype'))
-            ingredientInput.value = ''
-            ingredientCross.style.opacity = '0'
-        }))
+        for (let li of liTags) {
+            li.addEventListener('click', async () => {
+                addTag(li.textContent, li.getAttribute('filtertype'), 'tagsBloc')
+                await state.setFilter('add', li.textContent.toLowerCase(), li.getAttribute('filtertype'))
+                ingredientInput.value = ''
+                ingredientCross.style.opacity = '0'
+            })
+        }
     })
 
     state.listen('devices', (devices) => {
         displayFilterList(devices, 'searchDevicesResults', 'devices')
         const liTags = document.querySelectorAll('li[filterType=devices]')
-        liTags.forEach(li => li.addEventListener('click', async () => {
-            addTag(li.textContent, li.getAttribute('filtertype'), 'tagsBloc')
-            await state.setFilter('add', li.textContent.toLowerCase(), li.getAttribute('filtertype'))
-            devicesInput.value = ''
-            devicesCross.style.opacity = '0'
-        }))
+        for (let li of liTags) {
+            li.addEventListener('click', async () => {
+                addTag(li.textContent, li.getAttribute('filtertype'), 'tagsBloc')
+                await state.setFilter('add', li.textContent.toLowerCase(), li.getAttribute('filtertype'))
+                devicesInput.value = ''
+                devicesCross.style.opacity = '0'
+            })
+        }
     })
 
     state.listen('utensils', (utensils) => {
         displayFilterList(utensils, 'searchUtensilsResults', 'utensils')
         const liTags = document.querySelectorAll('li[filterType=utensils]')
-        liTags.forEach(li => li.addEventListener('click', async () => {
-            addTag(li.textContent, li.getAttribute('filtertype'), 'tagsBloc')
-            await state.setFilter('add', li.textContent.toLowerCase(), li.getAttribute('filtertype'))
-            utensilsInput.value = ''
-            utensilCross.style.opacity = '0'
-        }))
+        for (let li of liTags) {
+            li.addEventListener('click', async () => {
+                addTag(li.textContent, li.getAttribute('filtertype'), 'tagsBloc')
+                await state.setFilter('add', li.textContent.toLowerCase(), li.getAttribute('filtertype'))
+                utensilsInput.value = ''
+                utensilCross.style.opacity = '0'
+            })
+        }
     })
 
 
@@ -93,8 +101,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const cross = document.querySelector('#ingredients + button')
         cross.style.opacity = '0'
         if (ingredientInput.value.length > 0) cross.style.opacity = '1'
-        const result = state.ingredients.filter(v => v.includes(ingredientInput.value))
-        state.listenersFn.ingredients.forEach(fn => fn(result))
+        const result = state.ingredients._filter(v => v._includesOnString(ingredientInput.value))
+        for (let fn of state.listenersFn.ingredients) {
+            fn(result)
+        }
     })
 
     const devicesInput = document.getElementById('devices')
@@ -102,8 +112,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const cross = document.querySelector('#devices + button')
         cross.style.opacity = '0'
         if (devicesInput.value.length > 0) cross.style.opacity = '1'
-        const result = state.devices.filter(v => v.includes(devicesInput.value))
-        state.listenersFn.devices.forEach(fn => fn(result))
+        const result = state.devices._filter(v => v._includesOnString(devicesInput.value))
+        for (let fn of state.listenersFn.devices) {
+            fn(result)
+        }
     })
 
     const utensilsInput = document.getElementById('utensils')
@@ -111,26 +123,33 @@ document.addEventListener('DOMContentLoaded', async () => {
         const cross = document.querySelector('#utensils + button')
         cross.style.opacity = '0'
         if (utensilsInput.value.length > 0) cross.style.opacity = '1'
-        const result = state.utensils.filter(v => v.includes(utensilsInput.value))
-        state.listenersFn.utensils.forEach(fn => fn(result))
+        const result = state.utensils._filter(v => v._includesOnString(utensilsInput.value))
+        for (let fn of state.listenersFn.utensils) {
+            fn(result)
+        }
     })
 
     const ingredientCross = document.getElementById('ingredientsCross')
     ingredientCross.addEventListener('click', () => {
         ingredientInput.value = ''
-        state.listenersFn.ingredients.forEach(fn => fn(state.ingredients))
-        ingredientCross.style.opacity = '0'
+        for (let fn of state.listenersFn.utensils) {
+            fn(state.ingredients)
+        }         ingredientCross.style.opacity = '0'
     });
     const devicesCross = document.getElementById('devicesCross')
     devicesCross.addEventListener('click', () => {
         devicesInput.value = ''
-        state.listenersFn.devices.forEach(fn => fn(state.devices))
+        for (let fn of state.listenersFn.devices) {
+            fn(state.utensils)
+        }
         devicesCross.style.opacity = '0'
     });
     const utensilCross = document.getElementById('utensilsCross')
     utensilCross.addEventListener('click', () => {
         utensilsInput.value = '';
-        state.listenersFn.utensils.forEach(fn => fn(state.utensils))
+        for (let fn of state.listenersFn.utensils) {
+            fn(state.utensils)
+        }
         utensilCross.style.opacity = '0'
 
     })
