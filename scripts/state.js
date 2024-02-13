@@ -26,7 +26,6 @@ export class State {
         ingredients: [],
         devices: [],
         utensils: [],
-        remove: [],
     };
 
     /**

@@ -14,13 +14,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log('DOM fully loaded');
 
     resetCardGallery();
+
     state.listen('recipes', (recipes) => {
         resetCardGallery();
         document.getElementById('errorMessage').innerHTML = ''
         if (!state.recipes.length) {
             let errorMessage;
-            !searchInput.value.length > 0 ? errorMessage = `Aucune recette ne contient ${searchInput.value} vous pouvez chercher «
-tarte aux pommes », « poisson », etc` : errorMessage = 'vos filtres';
+            !searchInput.value.length > 0
+                ? errorMessage = `Aucune recette ne contient ${searchInput.value} vous pouvez chercher «
+            tarte aux pommes », « poisson », etc`
+                : errorMessage = 'vos filtres';
             document.getElementById('errorMessage').innerHTML = errorMessage;
         }
         recipes
@@ -36,6 +39,8 @@ tarte aux pommes », « poisson », etc` : errorMessage = 'vos filtres';
         liTags.forEach(li => li.addEventListener('click', async () => {
             addTag(li.textContent, li.getAttribute('filtertype'), 'tagsBloc')
             await state.setFilter('add', li.textContent.toLowerCase(), li.getAttribute('filtertype'))
+            ingredientInput.value = ''
+            ingredientCross.style.opacity = '0'
         }))
     })
 
@@ -45,6 +50,8 @@ tarte aux pommes », « poisson », etc` : errorMessage = 'vos filtres';
         liTags.forEach(li => li.addEventListener('click', async () => {
             addTag(li.textContent, li.getAttribute('filtertype'), 'tagsBloc')
             await state.setFilter('add', li.textContent.toLowerCase(), li.getAttribute('filtertype'))
+            devicesInput.value = ''
+            devicesCross.style.opacity = '0'
         }))
     })
 
@@ -54,6 +61,8 @@ tarte aux pommes », « poisson », etc` : errorMessage = 'vos filtres';
         liTags.forEach(li => li.addEventListener('click', async () => {
             addTag(li.textContent, li.getAttribute('filtertype'), 'tagsBloc')
             await state.setFilter('add', li.textContent.toLowerCase(), li.getAttribute('filtertype'))
+            utensilsInput.value = ''
+            utensilCross.style.opacity = '0'
         }))
     })
 
@@ -104,6 +113,26 @@ tarte aux pommes », « poisson », etc` : errorMessage = 'vos filtres';
         if (utensilsInput.value.length > 0) cross.style.opacity = '1'
         const result = state.utensils.filter(v => v.includes(utensilsInput.value))
         state.listenersFn.utensils.forEach(fn => fn(result))
+    })
+
+    const ingredientCross = document.getElementById('ingredientsCross')
+    ingredientCross.addEventListener('click', () => {
+        ingredientInput.value = ''
+        state.listenersFn.ingredients.forEach(fn => fn(state.ingredients))
+        ingredientCross.style.opacity = '0'
+    });
+    const devicesCross = document.getElementById('devicesCross')
+    devicesCross.addEventListener('click', () => {
+        devicesInput.value = ''
+        state.listenersFn.devices.forEach(fn => fn(state.devices))
+        devicesCross.style.opacity = '0'
+    });
+    const utensilCross = document.getElementById('utensilsCross')
+    utensilCross.addEventListener('click', () => {
+        utensilsInput.value = '';
+        state.listenersFn.utensils.forEach(fn => fn(state.utensils))
+        utensilCross.style.opacity = '0'
+
     })
 });
 
