@@ -73,22 +73,29 @@ export class State {
      */
     setRecipes = (recipes) => {
         this.recipes = recipes;
-        this.listenersFn.recipes.forEach(fn => fn(this.recipes));
-    };
+        for (let fn of this.listenersFn.recipes) {
+            fn(this.recipes)
+        }    };
 
     setIngredients = (ingredients) => {
-        this.ingredients = ingredients._filter( i => !this.filter.ingredients._includesOnArray(i) )
-        this.listenersFn.ingredients.forEach(fn => fn(this.ingredients))
+        this.ingredients = ingredients._filter(i => !this.filter.ingredients._includesOnArray(i))
+        for (let fn of this.listenersFn.ingredients) {
+            fn(this.ingredients)
+        }
     }
 
     setDevices = (devices) => {
-        this.devices = devices._filter( d => !this.filter.devices._includesOnArray(d))
-        this.listenersFn.devices.forEach(fn => fn(this.devices))
+        this.devices = devices._filter(d => !this.filter.devices._includesOnArray(d))
+        for (let fn of this.listenersFn.devices) {
+            fn(this.devices)
+        }
     }
 
     setUtensils = (utensils) => {
-        this.utensils = utensils._filter( u => !this.filter.utensils._includesOnArray(u) )
-        this.listenersFn.utensils.forEach(fn => fn(this.utensils))
+        this.utensils = utensils._filter(u => !this.filter.utensils._includesOnArray(u))
+        for (let fn of this.listenersFn.utensils) {
+            fn(this.utensils)
+        }
     }
 
 }
