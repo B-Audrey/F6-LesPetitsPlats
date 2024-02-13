@@ -1,4 +1,4 @@
-export const getData = async () => {
+const getData = async () => {
     return await (await fetch('../recipes.json')).json()
 };
 //this is a big ojbect, having fonctions

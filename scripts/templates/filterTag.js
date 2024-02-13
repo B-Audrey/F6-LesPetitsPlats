@@ -1,5 +1,7 @@
-
 //utilisation des "create element" pour ne pas regénérer tout le HTML et perdre les listeners précédemment placés
+//utilisation des "create element" pour ne pas regénérer tout le HTML et perdre les listeners précédemment placés
+import {listenTag} from '../main.js';
+
 export const addTag = (tagStringContent, className, parentElementId) => {
     const tagId = `tag_${className}_${tagStringContent}`;
 
@@ -18,6 +20,10 @@ export const addTag = (tagStringContent, className, parentElementId) => {
     liElement.appendChild(removeButton);
 
     document.getElementById(`${parentElementId}`).appendChild(liElement);
+
+    removeButton.addEventListener('click', () => {
+        listenTag(liElement)
+    })
 }
 
 

@@ -47,42 +47,27 @@ export class State {
             if (filterType === 'query') {
                 filter.length >= 3 ? this.filter.query = filter : this.filter.query = ''
             } else if (filterType === 'text') {
+                this.filter.query = ''
                 this.filter.text.push(filter)
-                this.filter.query = '';
-            } else if (filterType === 'ingredients') this.filter.ingredients.push(filter);
-            else if (filterType === 'devices') this.filter.devices.push(filter);
-            else if (filterType === 'utensils') this.filter.utensils.push(filter);
-            else console.log('filtre non rempli')
-
+            } else {
+                this.filter[filterType].push(filter)
+            }
         }
+
         if (action === 'remove') {
             if (filterType === 'query') {
                 this.filter.query = ''
-            } else if (filterType === 'text') {
-                const index = this.filter.text.indexOf(filter)
-                if (index !== -1) this.filter.text.splice(index, 1)
-            } else if (filterType === 'ingredients') {
-                const index = this.filter.ingredients.indexOf(filter)
-                if (index !== -1) this.filter.ingredients.splice(index, 1)
+            } else {
+                const index = this.filter[filterType].indexOf(filter)
+                if (index !== -1) this.filter[filterType].splice(index, 1)
             }
-            else if (filterType === 'devices') {
-                const index = this.filter.devices.indexOf(filter)
-                if (index !== -1) this.filter.devices.splice(index, 1)
-            }
-            else if (filterType === 'utensils') {
-                const index = this.filter.utensils.indexOf(filter)
-                if (index !== -1) this.filter.utensils.splice(index, 1)
-            }
-            else console.log('filtre non rempli')
         }
-
-        console.log(this.filter)
         this.setRecipes(await backService.getRecipes(this.filter));
         this.setIngredients(backService.getIngredients(this.recipes))
         this.setDevices(backService.getDevices(this.recipes))
         this.setUtensils(backService.getUtensils(this.recipes))
-        this.listenersFn.remove.forEach(fn => fn())
-    };
+    }
+    ;
 
     /**
      * Set recipes and notify listeners
