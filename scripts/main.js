@@ -32,10 +32,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('errorMessage').innerHTML = ''
         if (!state.recipes.length) {
             let errorMessage;
-            !searchInput.value.length > 0
-                ? errorMessage = `Aucune recette ne contient ${searchInput.value} vous pouvez chercher «
+            searchInput.value.length > 0
+                ? errorMessage = `Aucune recette ne contient ${searchInput.value}, vous pouvez chercher «
             tarte aux pommes », « poisson », etc`
-                : errorMessage = 'vos filtres';
+                : errorMessage = `Aucune recette ne contient vos filtres, vous pouvez chercher «
+            tarte aux pommes », « poisson », etc`
             document.getElementById('errorMessage').innerHTML = errorMessage;
         }
         recipes
