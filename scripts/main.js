@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('errorMessage').innerHTML = ''
         if (!state.recipes.length) {
             let errorMessage;
-            !searchInput.value.length > 0
+            searchInput.value.length > 0
                 ? errorMessage = `Aucune recette ne contient ${searchInput.value}, vous pouvez chercher «
             tarte aux pommes », « poisson », etc`
                 : errorMessage = `Aucune recette ne contient vos filtres, vous pouvez chercher «
