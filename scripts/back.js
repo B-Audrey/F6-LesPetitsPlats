@@ -22,7 +22,7 @@ export const backService = {
             });
         }
 
-        if (filter.text.length) {
+        if (filter.text?.length) {
             filter.text.forEach(text => {
                 recipes = recipes.filter((recipe) => {
                     const descriptionMatch = recipe.description.toLowerCase().includes(text);
@@ -35,14 +35,14 @@ export const backService = {
             })
         }
 
-        if (filter.devices.length) {
+        if (filter.devices?.length) {
             filter.devices.forEach((device) => {
                 recipes = recipes.filter(recipe => recipe.appliance.toLowerCase() === device)
 
             })
         }
 
-        if (filter.utensils.length) {
+        if (filter.utensils?.length) {
             filter.utensils.forEach(utensil => {
                 recipes = recipes.filter(recipe => {
                     return recipe.utensils.includes(utensil.toLowerCase());
@@ -51,7 +51,7 @@ export const backService = {
             })
         }
 
-        if (filter.ingredients.length) {
+        if (filter.ingredients?.length) {
             filter.ingredients.forEach(ingr => {
                 recipes = recipes.filter(recipe => {
                     const currentIngredients = recipe.ingredients.map((i) => i.ingredient.toLowerCase())

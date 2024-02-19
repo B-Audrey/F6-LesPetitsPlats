@@ -1,6 +1,9 @@
 import {backService} from './back.js';
 
 export class State {
+    /**
+     * current data
+     */
     recipes = [];
     ingredients = [];
     devices = [];
@@ -8,7 +11,6 @@ export class State {
 
     /**
      * filters to store search params
-     * @type filter : {devices: [], query: null, ingredients: [], text: [], utensils: []}
      */
     filter = {
         query: null,
@@ -34,7 +36,7 @@ export class State {
      * @param listenFunction
      */
     setListenFunctions = (key, listenFunction) => {
-        if (!this.listenersFn[key]) this.listenersFn[key] = [];
+        if (!this.listenersFn[key]) console.error('unvalid key');
         this.listenersFn[key].push(listenFunction);
     };
 
@@ -99,7 +101,7 @@ export class State {
      * @param devices
      */
     setDevices = (devices) => {
-        this.devices = devices.filter( u => !this.filter.utensils.includes(u) )
+        this.devices = devices.filter( u => !this.filter.devices.includes(u) )
         this.listenersFn.devices.forEach(fn => fn(this.devices))
     }
 

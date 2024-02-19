@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await state.setFilter('add', searchInput.value, 'text')
         addTag(searchInput.value, 'text', 'searchTagsBloc')
         searchInput.value = ''
-        document.getElementById('searchXmark').style.opacity = '0';
+        document.getElementById('searchCross').style.opacity = '0';
     })
 
     /**
