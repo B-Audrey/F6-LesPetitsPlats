@@ -1,33 +1,38 @@
 const getData = async () => {
     return await (await fetch('../recipes.json')).json()
 };
-//this is a big ojbect, having fonctions
+//this is a big object, having functions that state can call to get data
 export const backService = {
+    /**
+     * calculate recipes depending on params object
+     * @param filter
+     * @returns {Promise<recipes[]>}
+     */
     getRecipes: async (filter) => {
         let recipes = await getData();
 
         if (filter.query?.length) {
-            recipes = recipes.filter((recipe) => {
-                const descriptionMatch = recipe.description.toLowerCase().includes(filter.query);
-                const recipeNameMatches = recipe.name.toLowerCase().includes(filter.query);
-                const ingredientsMatch = recipe.ingredients.some((element) => {
-                    return element.ingredient.toLowerCase().includes(filter.query);
+            recipes = recipes._filter((recipe) => {
+                const descriptionMatch = recipe.description.toLowerCase()._includesOnString(filter.query);
+                const recipeNameMatches = recipe.name.toLowerCase()._includesOnString(filter.query);
+                const ingredientsMatch = recipe.ingredients._some((element) => {
+                    return element.ingredient.toLowerCase()._includesOnString(filter.query);
                 });
                 return recipeNameMatches || ingredientsMatch || descriptionMatch;
             });
         }
 
         if (filter.text.length) {
-            filter.text.forEach(text => {
-                recipes = recipes.filter((recipe) => {
-                    const descriptionMatch = recipe.description.toLowerCase().includes(text);
-                    const recipeNameMatches = recipe.name.toLowerCase().includes(text);
-                    const ingredientsMatch = recipe.ingredients.some((element) => {
-                        return element.ingredient.toLowerCase().includes(text);
+            for (const text of filter.text) {
+                recipes = recipes._filter((recipe) => {
+                    const descriptionMatch = recipe.description.toLowerCase()._includesOnString(text);
+                    const recipeNameMatches = recipe.name.toLowerCase()._includesOnString(text);
+                    const ingredientsMatch = recipe.ingredients._some((element) => {
+                        return element.ingredient.toLowerCase()._includesOnString(text);
                     });
                     return recipeNameMatches || ingredientsMatch || descriptionMatch;
                 });
-            })
+            }
         }
 
         if (filter.devices.length) {
@@ -56,14 +61,29 @@ export const backService = {
         }
         return recipes;
     },
+    /**
+     *
+     * @param recipes
+     * @returns {string[]}
+     */
     getIngredients: (recipes) => {
         const ingredients = recipes.flatMap(recipe => recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase()))
         return Array.from(new Set(ingredients))
     },
+    /**
+     *
+     * @param recipes
+     * @returns {string[]}
+     */
     getDevices: (recipes) => {
         const devices = recipes.map(recipe => recipe.appliance.toLowerCase())
         return Array.from(new Set(devices))
     },
+    /**
+     *
+     * @param recipes
+     * @returns {string[]}
+     */
     getUtensils: (recipes) => {
         const utensils = recipes.flatMap(recipe => recipe.utensils.map(u => u.toLowerCase()))
         return Array.from(new Set(utensils))

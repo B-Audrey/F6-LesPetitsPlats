@@ -2,13 +2,17 @@ import {backService} from './back.js';
 
 // Manage state of the view
 // Use only setters to update state
+// This is a class with methods to update state and react to updates
 export class State {
+    /**
+     * Current data
+     */
     recipes = [];
     ingredients = [];
     devices = [];
     utensils = [];
     /**
-     * Filter to apply on any data
+     * Filter to apply on data
      */
     filter = {
         query: null,
@@ -18,8 +22,9 @@ export class State {
         text: [],
     };
     /**
-     * Listeners for each key
-     * add key for each data you want to listen
+     * Listeners functions stored with a unique key
+     * the key for each data to know which functions to call
+     * the value is an array of successive functions
      */
     listenersFn = {
         recipes: [],
@@ -28,13 +33,16 @@ export class State {
         utensils: [],
     };
 
+    //METHODS
+
     /**
      * Add a listener to a key
+     * if the key doesn't exist, return an error
      * @param key
      * @param listenFunction
      */
-    listen = (key, listenFunction) => {
-        if (!this.listenersFn[key]) this.listenersFn[key] = [];
+    setListenFunctions = (key, listenFunction) => {
+        if (!this.listenersFn[key]) console.error('you cant add a key that is not define');
         this.listenersFn[key].push(listenFunction);
     };
 
@@ -69,27 +77,44 @@ export class State {
     ;
 
     /**
-     * Set recipes and notify listeners
+     * Set recipes and notify listeners fn about recipe update
      * @param recipes
      */
     setRecipes = (recipes) => {
         this.recipes = recipes;
-        this.listenersFn.recipes.forEach(fn => fn(this.recipes));
-    };
+        for (let fn of this.listenersFn.recipes) {
+            fn(this.recipes)
+        }    };
 
+    /**
+     * Set ingredients :
+     * remove ingredients that are in filers and notify listeners fn about ingredients update
+     * @param ingredients
+     */
     setIngredients = (ingredients) => {
         this.ingredients = ingredients.filter( u => !this.filter.ingredients.includes(u) )
         this.listenersFn.ingredients.forEach(fn => fn(this.ingredients))
     }
 
+    /**
+     * Set devices :
+     * remove devices that are in filters and notify listeners fn about devices update
+     * @param devices
+     */
     setDevices = (devices) => {
-        this.devices = devices.filter( u => !this.filter.utensils.includes(u) )
+        this.devices = devices.filter( u => !this.filter.devices.includes(u) )
         this.listenersFn.devices.forEach(fn => fn(this.devices))
     }
 
+    /**
+     * Set utensils
+     * remove utensils that are in filters and notify listeners fn about utensil update
+     * @param utensils
+     */
     setUtensils = (utensils) => {
         this.utensils = utensils.filter( u => !this.filter.utensils.includes(u) )
         this.listenersFn.utensils.forEach(fn => fn(this.utensils))
     }
+
 
 }
