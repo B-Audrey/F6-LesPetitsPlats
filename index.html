@@ -18,7 +18,7 @@
     <h1>Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses</h1>
     <form>
         <div>
-            <input type="text" id="search" placeholder="Recherchez une recette, un ingrédient...">
+            <input type="text" maxlength="25" id="search" placeholder="Recherchez une recette, un ingrédient...">
             <button id="searchCross" type="button" style="opacity:0"><i class="fa-solid fa-xmark"></i></button>
             <button type="button" class="main-search"><img src="./assets/loop.png" alt="loop" id="searchLoop"></button>
         </div>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="toggleable">
                     <form>
-                        <input type="text" id="ingredients">
+                        <input type="text" maxlength="20" id="ingredients">
                         <button type="button" style="opacity:0" id="ingredientsCross"><i class="fa-solid fa-xmark"></i></button>
                         <img src="./assets/loop.png" alt="loop" class="formLoop">
                         <label for="ingredients"></label>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="toggleable">
                     <form>
-                        <input type="text" id="devices">
+                        <input type="text" maxlength="20" id="devices">
                         <button type="button" style="opacity:0" id="devicesCross"><i class="fa-solid fa-xmark"></i></button>
                         <img src="./assets/loop.png" alt="loop" class="formLoop">
                         <label for="devices"></label>
@@ -75,7 +75,7 @@
                 <div class="toggleable">
 
                     <form>
-                        <input type="text" id="utensils">
+                        <input type="text" maxlength="20" id="utensils">
                         <button type="button" style="opacity:0" id="utensilsCross"><i class="fa-solid fa-xmark"></i></button>
                         <img src="./assets/loop.png" alt="loop" class="formLoop">
                         <label for="utensils"></label>
