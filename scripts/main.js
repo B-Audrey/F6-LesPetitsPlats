@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     /**
      * listen on filter blocs when written
      * if input is written, display X cross
-     * simule an auto-complete
+     * simulate an auto-complete
      * generate new HTML content filtered with input value content
      */
     const ingredientInput = document.getElementById('ingredients')
