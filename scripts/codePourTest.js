@@ -1,5 +1,60 @@
+function getRecipes (filter){
+    if (filter.query?.length) {
+        recipes = recipes._filter((recipe) => {
+            const descriptionMatch = recipe.description.toLowerCase()._includesOnString(filter.query);
+            const recipeNameMatches = recipe.name.toLowerCase()._includesOnString(filter.query);
+            const ingredientsMatch = recipe.ingredients._some((element) => {
+                return element.ingredient.toLowerCase()._includesOnString(filter.query);
+            });
+            return recipeNameMatches || ingredientsMatch || descriptionMatch;
+        });
+    }
 
-const recipes = [
+    if (filter.text.length) {
+        filter.text.forEach(text => {
+            recipes = recipes._filter((recipe) => {
+                const descriptionMatch = recipe.description.toLowerCase()._includesOnString(text);
+                const recipeNameMatches = recipe.name.toLowerCase()._includesOnString(text);
+                const ingredientsMatch = recipe.ingredients._some((element) => {
+                    return element.ingredient.toLowerCase()._includesOnString(text);
+                });
+                return recipeNameMatches || ingredientsMatch || descriptionMatch;
+            });
+        })
+    }
+
+    if (filter.devices.length) {
+        filter.devices.forEach((device) => {
+            recipes = recipes.filter(recipe => recipe.appliance.toLowerCase() === device)
+
+        })
+    }
+
+    if (filter.utensils.length) {
+        filter.utensils.forEach(utensil => {
+            recipes = recipes.filter(recipe => {
+                return recipe.utensils.includes(utensil.toLowerCase());
+            });
+
+        })
+    }
+
+    if (filter.ingredients.length) {
+        filter.ingredients.forEach( ingr => {
+            recipes = recipes.filter(recipe => {
+                const currentIngredients = recipe.ingredients.map( (i) => i.ingredient.toLowerCase() )
+                return currentIngredients.includes(ingr.toLowerCase());
+            });
+        })
+    }
+    return recipes;
+}
+
+
+getRecipes({query : 'frais', text : 'tarte'})
+
+
+let recipes = [
     {
         "id": 1,
         "image": "Recette01.jpg",
@@ -1774,13 +1829,17 @@ const recipes = [
         "appliance": "Four",
         "utensils":["rouleau à patisserie","fouet"]
     }
-]
+];
 
-Array.prototype._filter = function (callback) {
+
+Array.prototype._filter = function(callback) {
+    //init result
     let filteredArray = [];
-
-    for (let i = 0; i < this.length; i++) {
+//pour chaque donnée on boucle dessus
+    for (let i = 0; i < this.length;  i++) {
+        //on applique la fn callback sur l'element courant et on regarde si elle renvoie vrai
         if (callback(this[i])) {
+            //si elle renvoie vrai, on pousse sa valeur dans le tableau de resultat
             filteredArray.push(this[i]);
         }
     }
@@ -1788,62 +1847,48 @@ Array.prototype._filter = function (callback) {
     return filteredArray;
 }
 
-String.prototype._includesOnString = function (stringToFind) {
-    for (let i = 0; i <= this.length - stringToFind.length; i++) {
+String.prototype._includesOnString = function(stringToFind) {
+    // Parcours de chaque caractère de la chaîne principale tant que l'on a pas atteint la totalité - la longeur de la string à comparer
+    for (let i = 0; i <= (this.length - stringToFind.length); i++) {
+        //init d'avoir trouvé à vrai
         let found = true;
+        // pour chaque caractère de la chaine totale, on parcours chaque caractère de la sous chaine à trouver pour la comparaison
         for (let j = 0; j < stringToFind.length; j++) {
+            // si le caractère recherché (i+j) et celui de la sous chaine ne correspondent pas, on renvoie faux et on passe au suivant
             if (this[i + j] !== stringToFind[j]) {
                 found = false;
+                break;
             }
         }
+        // Si la sous-chaîne est trouvée, renvoyer vrai
         if (found) {
             return true;
         }
     }
+    // Si la boucle se termine sans trouver la sous-chaîne, renvoyer faux
     return false;
 };
 
-
-Array.prototype._some = function (callback) {
+Array.prototype._some = function(callback) {
+    // Parcours du tableau
     for (let i = 0; i < this.length; i++) {
-        if (callback(this[i], i, this)) {
-            return true;
+        // applique la callback sur chaque élément
+        if (callback(this[i])) {
+            return true; // si on rentre dans la boucle c'est que la callback apliquée renvoi vrai
         }
     }
+    // Si la boucle se termine sans trouver d'élément satisfaisant la condition, renvoyer faux
     return false;
 };
 
-function getRecipes (filter) {
-    let recipes = []
-
-    if (filter.query?.length) {
-        recipes = recipes._filter((recipe) => {
-            const descriptionMatch = recipe.description.toLowerCase()._includesOnString(filter.query);
-            const recipeNameMatches = recipe.name.toLowerCase()._includesOnString(filter.query);
-            const ingredientsMatch = recipe.ingredients._some((element) => {
-                return element.ingredient.toLowerCase()._includesOnString(filter.query);
-            });
-            return recipeNameMatches || ingredientsMatch || descriptionMatch;
-        });
+Array.prototype._map = function(callback) {
+    // Initialiser un nouveau tableau pour stocker les résultats
+    let mappedArray = [];
+    // Parcours du tableau
+    for (let i = 0; i < this.length; i++) {
+        // Applique la callback sur chaque élément et stock du résultat
+        mappedArray.push(callback(this[i]));
     }
-
-    if (filter.text.length) {
-        filter.text.forEach(text => {
-            recipes = recipes._filter((recipe) => {
-                const descriptionMatch = recipe.description.toLowerCase()._includesOnString(text);
-                const recipeNameMatches = recipe.name.toLowerCase()._includesOnString(text);
-                const ingredientsMatch = recipe.ingredients._some((element) => {
-                    return element.ingredient.toLowerCase()._includesOnString(text);
-                });
-                return recipeNameMatches || ingredientsMatch || descriptionMatch;
-            });
-        })
-    }
-    return recipes;
-
-}
-
-
-const r = getRecipes({text : "tarte", query : "fraise"})
-
-console.log(r)
+    // Renvoyer le nouveau tableau contenant les résultats
+    return mappedArray;
+};

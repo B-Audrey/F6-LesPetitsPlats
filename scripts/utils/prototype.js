@@ -35,18 +35,6 @@ String.prototype._includesOnString = function(stringToFind) {
     return false;
 };
 
-Array.prototype._includesOnArray = function(elementToFind) {
-    // Parcours du tableau
-    for (let i = 0; i < this.length; i++) {
-        // voir si l'élément courant est égal à l'élément recherché
-        if (this[i] === elementToFind) {
-            return true; // Renvoyer vrai si l'élément est trouvé
-        }
-    }
-    // Si la boucle se termine sans trouver l'élément, renvoie faux
-    return false;
-};
-
 Array.prototype._some = function(callback) {
     // Parcours du tableau
     for (let i = 0; i < this.length; i++) {
@@ -68,26 +56,5 @@ Array.prototype._map = function(callback) {
         mappedArray.push(callback(this[i]));
     }
     // Renvoyer le nouveau tableau contenant les résultats
-    return mappedArray;
-};
-Array.prototype._flatMap = function(callback) {
-    // Initialiser un nouveau tableau pour stocker les résultats aplatis
-    let mappedArray = [];
-    // Parcours du tableau
-    for (let i = 0; i < this.length; i++) {
-        // applique la callback et stock le resultat sur chaque élément
-        let result = callback(this[i]);
-        // Vérifier si le résultat est un tableau
-        if (Array.isArray(result)) {
-            // si c'est le cas, boucler dessus pour renvoyer tous les elements individuellements
-            for (let r of result) {
-                mappedArray.push(r)
-            }
-        } else {
-            // sinon, ajouter le résultat au tableau applati tel quel
-            mappedArray.push(result);
-        }
-    }
-    // Renvoyer le nouveau tableau aplati
     return mappedArray;
 };

@@ -1,8 +1,13 @@
 const getData = async () => {
     return await (await fetch('../recipes.json')).json()
 };
-//this is a big object, having functions
+//this is a big object, having functions that state can call to get data
 export const backService = {
+    /**
+     * calculate recipes depending on params object
+     * @param filter
+     * @returns {Promise<recipes[]>}
+     */
     getRecipes: async (filter) => {
         let recipes = await getData();
 
@@ -32,15 +37,15 @@ export const backService = {
 
         if (filter.devices.length) {
             filter.devices.forEach((device) => {
-                recipes = recipes._filter(recipe => recipe.appliance.toLowerCase() === device)
+                recipes = recipes.filter(recipe => recipe.appliance.toLowerCase() === device)
 
             })
         }
 
         if (filter.utensils.length) {
             filter.utensils.forEach(utensil => {
-                recipes = recipes._filter(recipe => {
-                    return recipe.utensils._includesOnArray(utensil.toLowerCase());
+                recipes = recipes.filter(recipe => {
+                    return recipe.utensils.includes(utensil.toLowerCase());
                 });
 
             })
@@ -48,24 +53,39 @@ export const backService = {
 
         if (filter.ingredients.length) {
             filter.ingredients.forEach( ingr => {
-                recipes = recipes._filter(recipe => {
-                    const currentIngredients = recipe.ingredients._map( (i) => i.ingredient.toLowerCase() )
-                    return currentIngredients._includesOnArray(ingr.toLowerCase());
+                recipes = recipes.filter(recipe => {
+                    const currentIngredients = recipe.ingredients.map( (i) => i.ingredient.toLowerCase() )
+                    return currentIngredients.includes(ingr.toLowerCase());
                 });
             })
         }
         return recipes;
     },
+    /**
+     *
+     * @param recipes
+     * @returns {string[]}
+     */
     getIngredients: (recipes) => {
-        const ingredients = recipes._flatMap(recipe => recipe.ingredients._map(ingredient => ingredient.ingredient.toLowerCase()))
+        const ingredients = recipes.flatMap(recipe => recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase()))
         return Array.from(new Set(ingredients))
     },
+    /**
+     *
+     * @param recipes
+     * @returns {string[]}
+     */
     getDevices: (recipes) => {
-        const devices = recipes._map(recipe => recipe.appliance.toLowerCase())
+        const devices = recipes.map(recipe => recipe.appliance.toLowerCase())
         return Array.from(new Set(devices))
     },
+    /**
+     *
+     * @param recipes
+     * @returns {string[]}
+     */
     getUtensils: (recipes) => {
-        const utensils = recipes._flatMap(recipe => recipe.utensils._map(u => u.toLowerCase()))
+        const utensils = recipes.flatMap(recipe => recipe.utensils.map(u => u.toLowerCase()))
         return Array.from(new Set(utensils))
     }
 }
