@@ -13,28 +13,6 @@ Array.prototype._filter = function(callback) {
     return filteredArray;
 }
 
-String.prototype._includesOnString = function(stringToFind) {
-    // Parcours de chaque caractère de la chaîne principale tant que l'on a pas atteint la totalité - la longeur de la string à comparer
-    for (let i = 0; i <= (this.length - stringToFind.length); i++) {
-        //init d'avoir trouvé à vrai
-        let found = true;
-        // pour chaque caractère de la chaine totale, on parcours chaque caractère de la sous chaine à trouver pour la comparaison
-        for (let j = 0; j < stringToFind.length; j++) {
-            // si le caractère recherché (i+j) et celui de la sous chaine ne correspondent pas, on renvoie faux et on passe au suivant
-            if (this[i + j] !== stringToFind[j]) {
-                found = false;
-                break;
-            }
-        }
-        // Si la sous-chaîne est trouvée, renvoyer vrai
-        if (found) {
-            return true;
-        }
-    }
-    // Si la boucle se termine sans trouver la sous-chaîne, renvoyer faux
-    return false;
-};
-
 Array.prototype._some = function(callback) {
     // Parcours du tableau
     for (let i = 0; i < this.length; i++) {

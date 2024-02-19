@@ -4,10 +4,10 @@
 //
 //     if (filter.query.length > 0) {
 //         recipes = recipes._filter((recipe) => {
-//             const descriptionMatch = recipe.description.toLowerCase()._includesOnString(filter.query);
-//             const recipeNameMatches = recipe.name.toLowerCase()._includesOnString(filter.query);
+//             const descriptionMatch = recipe.description.toLowerCase().includes(filter.query);
+//             const recipeNameMatches = recipe.name.toLowerCase().includes(filter.query);
 //             const ingredientsMatch = recipe.ingredients._some((element) => {
-//                 return element.ingredient.toLowerCase()._includesOnString(filter.query);
+//                 return element.ingredient.toLowerCase().includes(filter.query);
 //             });
 //             return recipeNameMatches || ingredientsMatch || descriptionMatch;
 //         });
@@ -16,10 +16,10 @@
 //     if (filter.text.length > 0) {
 //         for (const text of filter.text) {
 //             recipes = recipes._filter((recipe) => {
-//                 const descriptionMatch = recipe.description.toLowerCase()._includesOnString(text);
-//                 const recipeNameMatches = recipe.name.toLowerCase()._includesOnString(text);
+//                 const descriptionMatch = recipe.description.toLowerCase().includes(text);
+//                 const recipeNameMatches = recipe.name.toLowerCase().includes(text);
 //                 const ingredientsMatch = recipe.ingredients._some((element) => {
-//                     return element.ingredient.toLowerCase()._includesOnString(text);
+//                     return element.ingredient.toLowerCase().includes(text);
 //                 });
 //                 return recipeNameMatches || ingredientsMatch || descriptionMatch;
 //             });
