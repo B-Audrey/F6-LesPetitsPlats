@@ -23,7 +23,7 @@ export const backService = {
         }
 
         if (filter.text.length) {
-            filter.text.forEach(text => {
+            for (const text of filter.text) {
                 recipes = recipes._filter((recipe) => {
                     const descriptionMatch = recipe.description.toLowerCase()._includesOnString(text);
                     const recipeNameMatches = recipe.name.toLowerCase()._includesOnString(text);
@@ -32,7 +32,7 @@ export const backService = {
                     });
                     return recipeNameMatches || ingredientsMatch || descriptionMatch;
                 });
-            })
+            }
         }
 
         if (filter.devices.length) {
