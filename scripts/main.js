@@ -15,7 +15,6 @@ const state = new State();
 
 
 //Wait for DOM to be full
-
 document.addEventListener('DOMContentLoaded', async () => {
 
 
@@ -24,7 +23,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     // DEFINES FN TO BE CALLED LATER
-
     /**
      * to display recipes :
      * start with empty DOM
@@ -52,7 +50,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         displayCountRecipes(state.recipes.length)
 
     });
-
 
     /**
      * to display different filters lists (for ingredients, devices and utensils)
@@ -94,7 +91,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }))
     })
 
-
     /**
      * init with empty filters
      */
@@ -115,7 +111,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         await state.setFilter('add', searchInput.value, 'query');
     });
 
-
     /**
      * listen on loop, when click
      * set filters, add tag and init value
@@ -128,11 +123,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('searchCross').style.opacity = '0';
     })
 
-
     /**
      * listen on filter blocs when written
      * if input is written, display X cross
-     * simule an auto-complete
+     * simulate an auto-complete
      * generate new HTML content filtered with input value content
      */
     const ingredientInput = document.getElementById('ingredients')
@@ -162,9 +156,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         state.listenersFn.utensils.forEach(fn => fn(result))
     })
 
-
     /**
      * listeners on every X cross to empty input values
+     * !! searchCross doesn't need to prevent an autocomplete data update from state
      */
     const ingredientCross = document.getElementById('ingredientsCross')
     ingredientCross.addEventListener('click', () => {
@@ -190,9 +184,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         searchCross.style.opacity = '0'
     })
 
-
 });
 
+/**
+ * listen tag is a function to be called when tag is clicked to remove it
+ * then it updates new filters
+ * remove the liParent tagBloc from mDOM
+ * and display new content with the filter removed
+ * @param liParent
+ */
 export const listenTag = (liParent) => {
     state.setFilter('remove', liParent.textContent, liParent.className)
     liParent.remove()
