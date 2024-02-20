@@ -44,12 +44,16 @@ export class State {
     /**
      * set filters to add or remove data on filter current object
      * when filters are set, recipes, ingredients, devices and utensils are recalculated
+     * check if data is a correct string before updating the filter object
      * @param action
      * @param filter
      * @param filterType
      * @returns {Promise<void>}
      */
     setFilter = async (action, filter, filterType) => {
+        const regEx = /^([a-z]|[A-Z]|[0-9]){0,25}$/;
+        const isDataValid = regEx.test(filter);
+        if (!isDataValid) return;
         if (action === 'add') {
             if (filterType === 'query') {
                 filter.length >= 3 ? this.filter.query = filter : this.filter.query = ''
