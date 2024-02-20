@@ -48,8 +48,12 @@ export class State {
 
     /**
      * Set a filter and update recipes
+     * check if data is a correct string before updating the filter object
      */
     setFilter = async (action, filter, filterType) => {
+        const regEx = /^([a-z]|[A-Z]|[0-9]){0,25}$/;
+        const isDataValid = regEx.test(filter);
+        if (!isDataValid) return;
         if (action === 'add') {
             if (filterType === 'query') {
                 filter.length >= 3 ? this.filter.query = filter : this.filter.query = ''
