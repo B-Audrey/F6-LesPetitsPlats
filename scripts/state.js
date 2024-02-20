@@ -51,7 +51,7 @@ export class State {
      * @returns {Promise<void>}
      */
     setFilter = async (action, filter, filterType) => {
-        const regEx = /^([a-z]|[A-Z]|[0-9]){0,25}$/;
+        const regEx = /^([a-z]|[A-Z]|[0-9]|à|é|è|â|'|\(|\)|\s){3,25}$/;
         const isDataValid = regEx.test(filter);
         if (!isDataValid) return;
         if (action === 'add') {
@@ -95,7 +95,7 @@ export class State {
      * @param ingredients
      */
     setIngredients = (ingredients) => {
-        this.ingredients = ingredients.filter( u => !this.filter.ingredients.includes(u) )
+        this.ingredients = ingredients.filter( i => !this.filter.ingredients.includes(i) )
         this.listenersFn.ingredients.forEach(fn => fn(this.ingredients))
     }
 
@@ -105,7 +105,7 @@ export class State {
      * @param devices
      */
     setDevices = (devices) => {
-        this.devices = devices.filter( u => !this.filter.devices.includes(u) )
+        this.devices = devices.filter( d => !this.filter.devices.includes(d) )
         this.listenersFn.devices.forEach(fn => fn(this.devices))
     }
 
