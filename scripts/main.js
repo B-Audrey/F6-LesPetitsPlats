@@ -179,9 +179,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         utensilCross.style.opacity = '0'
     })
     const searchCross = document.getElementById('searchCross')
-    searchCross.addEventListener('click', () => {
+    searchCross.addEventListener('click', async () => {
         searchInput.value = ''
         searchCross.style.opacity = '0'
+        await state.setFilter('remove', '', 'query');
+
     })
 });
 
